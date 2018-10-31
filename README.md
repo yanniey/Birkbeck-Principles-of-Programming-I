@@ -1,10 +1,10 @@
 # Principles of Programming I
-## Master of Data Science at Birkbeck, University of London
-### 10/2018
+## Master of Data Science at Birkbeck, University of London, 10/2018
 
 ### Course Format:
 * On campus: 1 hour of lecture and 2 hours of lab per week
-* Online: ~ 5 hours of coding coursework on websites & assignments
+* Online: ~ 5 hours of coding coursework & assignments
+* Exam: 1 hour practical exam(open-book, solution written on computer) + 1 hour written exam (closed-book, solution written on paper)
 
 ### Syllabus   
   1. Just Enough Python to Get Started  
@@ -18,6 +18,7 @@
   9. More of Object-Oriented Programming   
   10. Functional Programming  
   11. Fundamental Data Structures 
+  12. Coursework Project
 
 #### Week 1: Just Enough Python to Get Started
 * Input, output, printing
@@ -38,18 +39,20 @@ Methods may amend the state of an object, but function wouldn't.
 * set `{}` are mutable, unordered, and does not contain duplicates
 * list `[]` can be amended/mutated
 
-<b>List</b> 
+##### List
 * python has zero indexing (i.e. first item always has index of 0)
 * List operations: `sort()`,`reverse()`,`extend()`
 * List[from: up to but not including]
 * Iterate through a list with index:
-```
+
+```py
 for index in range(0, len(my_list)):
   print("Element", index, "is", my_list[index])
 ```
 
 * Iterate through a list without index:
-```
+
+```py
 for element in my_list: 
   print(element, "is in the list")
 ```
@@ -63,14 +66,14 @@ for element in my_list:
   * List are not ok
   * Sets are not ok
 * you can't use `+`, but you can use `|` for addition :
-```
+```python
 s1={}  
 s2={}  
 s3=s1|s2
 ```
 * Iterate through a set:
 
-```
+```python
 for elemin s1:
   print(elem)
 ```
@@ -92,12 +95,12 @@ Example:
 `“Michael Jackson” in phonebook>> False` <- delete key/value for given key
 
 Iterating through dictionary:
-```
+```python
 for key in dict:
   print(key, dict[key])
 ```
 OR 
-```
+```python
 for key, valin dict.items():  
   print(key, val)
 ```
@@ -135,7 +138,7 @@ with reference to the values stored on the stack, e.g.
 `lists, dictionaries, sets, classes`
 
 When amending a list,  make a copy of the list (instead of the object itself)
-```{py}
+```python
 B=["Macbook","Toaster","Toilet Paper"]
 C = B[:]
 B[0] = “PC”
@@ -144,7 +147,7 @@ print(C)
 ```
 
 Alternatively, use the `copy()` function
-```{py}
+```python
 import copy
 ...
 C = copy.copy(B)
@@ -192,9 +195,72 @@ Bottom line:
   + If `R` has a heavier datatype, then the reference to the value of `R` is copied to `A`
 
 #### Week 5: Recursion
+Recursion must have a base case, similar to a `while` loop.
+
+Recurvise and iterative implementations: recursive program will consume much more memory, making loop more efficient.
+
+##### An example for recursion - calculate factorials:
+
+```py
+def fac(numb):
+  if numb ==1: return 1
+  else:
+    fac_numb_minus_1 = fac(numb-1)
+    result = numb*fac_numb_minus_1
+    return result
+
+fac(3)
+```
+
+1. Pros for using recursion ( in less demanding applications):
+* many search and sort problems
+* combinatorial problems: e.g., print all 0/1 strings of length n on Snakify  
+
+2. Cons for using recursion:
+* calling a function consumes more time and memory than adjusting a loop counter.
+* high performance applications (graphic action games, simulations of nuclear explosions) hardly ever use recursion.      
+
+Infinite Recursion (similar to infinite loop)
+
+```py
+def fac(numb):
+  fac_numb_minus_1=fac(numb-1)
+  result = numb*fac_numb_minus_1
+  return result
+```
+
+* A recursive function must contain at least one non-recursive branch.
+* The recursive calls must eventually lead to a non-recursive branch.
+
+
+##### Calculate Fibonacci Numbers
+
+```py
+fib(0) = 0, fib(1) = 1
+fib(n) = fib(n-1) + fib(n-2)
+
+def fib(n):
+  if n == 0: return 0
+  elif n==1: return 1 
+  else:
+    previous_fib_number = fib(n-1) 
+    previous_previous_fib_number = fib(n-2)
+    result = previous_fib_number + previous_previous_fib_number 
+    return result
+```
+
 #### Week 6. Files, Modules and Exceptions 
 #### Week 7. Software development principles 
 #### Week 8. Basics of Object-oriented programming 
 #### Week 9. More of Object-Oriented Programming 
 #### Week 10. Functional Programming
 #### Week 11. Fundamental Data Structures 
+#### Exams
+
+
+The file below provides not the final version (I publish what I could get) but the pre-final one that may slightly differ in wording, figures, and other minor things. The problems at the examination were anyway those from the file.  
+
+The part-A "Practical" is an exam, where you program your solutions on a machine in our lab with a semi-locked and monitored account, which will be different from the account you currently use. You can use books, WWW, and any other resources (for example, the code of your solutions to the programming problems). For that reason, problems here are harder than in the other part.  
+
+The part-B "Written" is the closed-book exam where you write the solutions on paper.
+Each part is a 1 hour examination submitted and marked independently from the other part. They are likely to be in the same day though. 
