@@ -250,6 +250,100 @@ def fib(n):
 ```
 
 #### Week 6. Files, Modules and Exceptions 
+* Files and Directories – text I/O, binary, random access
+* Exceptions
+* Modules and Libraries
+* Random and important math functions
+
+1. Files
+
+* Opening a file
+  ```py
+  infile = open(“file1.txt”, "r") 
+  ```
+  or `“rb”` to inform Python the file is binary
+* Read a number of symbols and return them as a string (and shift cursor) 
+  ```py
+  str = infile.read(10)
+  ```
+* Read a number of bytes and return them as a list 
+  `ten_bytes = infile.read(10)`
+* Read a whole line and return as string:
+  `line = infile.readline()`
+  + reading includes `\n` symbol too, so line will end with a character `\n` 
+  + use `line.rstrip()` to remove that character
+  + use `words = line.split(‘ ‘)` to get a list of words of line
+  + `infile.readline()` returns empty string if cursor is at the end of file
+
+* Writing to files
+  + Opening a file
+    `outfile = open(“file2.txt”, “w")` or `“wb”` to inform Python the file is binary
+  + Convenient output formatting tool is string substitution % operator
+    `formatted_string = string_where_substitutions_to_be_done % values`
+
+    ```py
+    N = 42
+    formatted_string = “I have spotted %d camels” % N
+    print(formatted_string)
+    >>I have spotted 42 camels
+    ```
+    `%d` says that N should be formatted as a decimal integer
+
+    ```py
+    value = 3.14159265359
+    print("%15.2f\n is pi" % value)
+    >> 3.14
+    ```
+    `%15.2f` says that value should be printed as float, occupying 15 chars in total, and only2 chars after `.`
+
+    `print(“I have spotted %d camels and pi is %15.2f” % (N, value))` using tuples to write to files.
+  + Write a string to a file
+    `outfile.write(str)`
+
+* Example of reading and writing files
+  ```py
+  inputFileName = input("Input file name: ")
+  outputFileName = input("Output file name: ")
+  # open the input and output files
+  infile = open(inputFileName, "r")
+  outfile = open(outputFileName, "w")
+  # Read the input and write the output.
+  total = 0.0
+  count = 0
+  line = infile.readline() while line != "" :
+  value = float(line) outfile.write("%15.2f\n" % value) total = total + value
+  count = count + 1
+  line = infile.readline()
+  # Output the total and average.
+  outfile.write("%15s\n" % "--------") 
+  outfile.write("Total: %8.2f\n" % total) 
+  avg = total / count 
+  outfile.write("Average: %6.2f\n" % avg)
+  # Close the files.
+  infile.close() 
+  outfile.close()  
+  ```
+* Reading the whole file at once (use with caution, e.g. when you know that the file is relatively small so that it doesn't take too much memory)
+  ```py
+  lines = infile.readlines()
+  for line in lines:
+    DoSomethingWith line
+  ```
+2. Exceptions
+  ```py
+  file_name = input("Enter name of the file to read: ")
+  try:
+      infile = open(file_name, "r")
+      line = infile.readline()
+      while line !='':
+            print(line.rstrip())
+            line = infile.readline()
+  except FileNotFoundError:
+      print('The file does not exist!')
+  ```
+
+  Ues `except Exception:` to cover all exceptions
+
 #### Week 7. Software development principles 
 #### Week 8. Basics of Object-oriented programming 
 #### Week 9. More of Object-Oriented Programming 
