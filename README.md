@@ -344,7 +344,74 @@ def fib(n):
 
   Ues `except Exception:` to cover all exceptions
 
-#### Week 7. Software development principles 
+#### Week 7. Software development principles (Errors and Testing, Unit testing, Git/Github)
+1. Types of testing in software development
+  * Unit test: when it fails, it tells you which piece of the code needs to be fixed
+  * Integration test: when it fails, it says that pieces of the application are not working together as expected
+  * Acceptance test: when it fails, it says that the application is not doing what the customer expects it to do
+  * Regression test: when it fails, it says that the application no longer behaves the way it used to
+
+2. Pytest for Unit Test
+  For best practice, the test file should be in the same folder as the function that you want to test `my_module.py`. 
+
+  ```py
+  import pytest
+  from my_module import *
+
+  def test_somefunction():
+      # some testing codes
+  def test_someotherfunction()
+      # some more testing codes
+  ```
+
+  Use `assert` statement for Pytest. The test is "passed" if the `Boolean_expression` evaluates to `True`, otherwise it failed.
+  ```py
+  def test_addition():
+    assert(5==addition(3,2))
+    # here addition(x,y) is the functon being tested
+  ```
+
+  To execute the tests, run `pytest` in command line when in the directory where both `test_somehting.py` and `my_module.py` are located.
+
+  Only use `==` equality sign for integers. It might not work for floats. For floats, use `abs(A-B)<0.0001`
+
+3. Test Driven Development(TDD)
+  TDD Slangs:
+    * Green: All tests pass
+    * Red: Some tests fail
+    * Refactor: Remove all duplicationa and smells created to just get the tests to work
+    * Stub: a shortest possible implementation of a function that returns some meaning (but usually incorrect) value. Use stubs to check that functions return some sort of values. 
+
+  ```py
+  from my_math import *
+  import pytest
+
+  def test_reminder_by_2():
+    assert mod_2(1) == 1
+    assert mod_2(4) == 0
+    
+
+  def test_even():
+    assert is_even(2) == True
+    assert is_even(5) == False
+  ```
+
+  A stub would be:
+  ```py
+  def mod_2(n):
+    # reminder from dvision by 2
+    return 0
+  
+  def is_even():
+    # test if the input is even
+    return False
+  ```
+
+  On the command line(when you're in the correct folder where both functions are stored), simply type:
+  ```py
+  pytest
+  ```
+
 #### Week 8. Basics of Object-oriented programming 
 #### Week 9. More of Object-Oriented Programming 
 #### Week 10. Functional Programming
@@ -352,6 +419,7 @@ def fib(n):
 #### Exams
 
 
+Regarding old exam papers:
 The file below provides not the final version (I publish what I could get) but the pre-final one that may slightly differ in wording, figures, and other minor things. The problems at the examination were anyway those from the file.  
 
 The part-A "Practical" is an exam, where you program your solutions on a machine in our lab with a semi-locked and monitored account, which will be different from the account you currently use. You can use books, WWW, and any other resources (for example, the code of your solutions to the programming problems). For that reason, problems here are harder than in the other part.  
