@@ -413,13 +413,137 @@ def fib(n):
   ```
 
 #### Week 8. Basics of Object-oriented programming 
+1. Objects: code is written around an object, which is 
+  * Data - a current state
+  * Methods - operations that can access/change the state 
+
+2. Classes: a "blueprint" for creating objects
+  * A class is specified by
+    + variable names to store data 
+    + methods specified by 
+      + method names
+      + requires arguments to call them
+      + their implementations
+
+3. An example
+  ```py
+  class CashRegister : 
+    def clear(self) :
+      self._itemCount = 0 
+      self._totalPrice = 0.0
+
+    def addItem(self, price) :
+      self._itemCount = self._itemCount + 1 
+      self._totalPrice = self._totalPrice + price
+
+    def getTotal(self) : # method 
+      return self._totalPrice
+
+    def getCount(self) : # method 
+      return self._itemCount
+  ```
+
+4. The constructor: used to initialise the variables in an object
+  ```py
+  class CashRegister:
+    def __init__(self):
+      self._itemCount = 0
+      self._totalPrice = 0.0
+  ```
+  The constructor should never be called explicitly, e.g. Don't do this:
+  ```py
+  register2346.__init__()
+  ```
+
+5. Methods, Self and Other
+  * What if we want to call a method of a class from another method (i.e. asking about the variable of the same object, use `self`)
+    ```py
+    class CashRegister :
+      def addItem(self, price):
+        tot = self.getTotal()
+        if tot <=100: self._itemCount = self._itemCount + 1 ...
+    ```
+  * Self and Other: distinguish object itself from `other`:
+    ```py
+    class CashRegister :
+    def copy(self, other) : #copy the state of other cash register to this one
+      self._itemCount = other._itemCount
+      self._totalPrice = other._totalPrice
+    ```
+    In the main program:
+    ```py
+    register2346.copy(register5375)
+    ```
+
+6. Encapsulation
+
+  * In Python there is no restriction on methods, but there's a convention that:
+    + If a method starts **with underscore**, don't call them outside of the class definition code.
+    ```py
+    def main():
+      ...
+      register2346._totalPrice = 1000
+    ```
+
+7. Assigning Object Variables
+  * Two instances of the same class that have the same content are **not identical to each ohter**
+
+  ```py
+  register2346 = CashRegister() 
+  register5375 = CashRegister() 
+  register2346.addItem(5.05) 
+  register5375.addItem(5.05)
+  
+  print(register2346 == register5375)
+  >> False
+  ```
+
+  * This is because `register2346` and `register5375` point to different pieces of memory, and therefore are not equal
+
+  * To check that the content of two variables are the same:
+  ```py
+  class CashRegister :
+    def isEqual(self, other):
+      if self._itemCount == other._itemCount and self._totalPrice == other._totalPrice:
+        return True
+      else: return False
+  ...
+  def main():
+    register2346 = CashRegister() 
+    register5375 = CashRegister() 
+    register2346.addItem(5.05) 
+    register5375.addItem(5.05) 
+    
+    print(register2346.isEqual(register5375))
+    >> True
+  ```
+
+8. Operators overloading: e.g. make `==` work in the same way as `isEqual(self,other)` by using operator overloading feature
+
+  * `isEqual` should change to have a standard name `__eq__`, two arguments self and y, and return True or False i.e.,
+  ```py
+  class CashRegister : 
+    def __eq__(self, y):
+      if self._itemCount == y._itemCount and self._totalPrice == y._totalPrice: 
+        return True
+      else: return False
+  ```
+
+  Then we can do:
+  ```py
+  register2346 = CashRegister() 
+  register5375 = CashRegister() 
+  
+  print(register2346 == register5375) 
+  >> True
+  ```
+
+
 #### Week 9. More of Object-Oriented Programming 
 #### Week 10. Functional Programming
 #### Week 11. Fundamental Data Structures 
 #### Exams
-
-
-Regarding old exam papers:
+#### Regarding old exam papers
 The file below provides not the final version (I publish what I could get) but the pre-final one that may slightly differ in wording, figures, and other minor things. The problems at the examination were anyway those from the file.  
 
 The part-A "Practical" is an exam, where you program your solutions on a machine in our lab with a semi-locked and monitored account, which will be different from the account you currently use. You can use books, WWW, and any other resources (for example, the code of your solutions to the programming problems). For that reason, problems here are harder than in the other part.  
