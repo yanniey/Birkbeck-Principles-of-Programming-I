@@ -4,6 +4,7 @@
 ### Course Format:
 * On campus: 1 hour of lecture and 2 hours of lab per week
 * Online: ~ 5 hours of coding coursework & assignments
+* Weekly 1 hour online discussion
 * Exam: 1 hour practical exam(open-book, solution written on computer) + 1 hour written exam (closed-book, solution written on paper)
 
 ### Syllabus   
@@ -540,6 +541,35 @@ def fib(n):
 
 
 #### Week 9. More of Object-Oriented Programming 
+
+1. Inheritance & super() class
+  Use `super()._init_()` to initiate a class
+
+2. Overriding: reimplementation of a method in a sub-class
+
+3. Class constants
+  * Used outside class: global constants
+  * Used inside class: visible only to the class. Example: call them by `FastLunarLander.Speed`
+
+4. Universal Superclass **object**
+  * `__str__()` and `__repr__`
+  * To make the output look as nice as for list we have to override `__repr__` in the class. For example:
+  ```py
+  class Employee
+    ...
+    def __repr__(self):
+    str = self._name + “: ” + self._payrollNum + “, “ + self._salary + “.” return str
+  ```
+  Result:
+  ```py
+  print(keith)
+  >> Keith Mannock: 3333, 30000
+  ```
+
+5. None reference
+  * Use `None` as dummy value for class, e.g.`self._department =None`
+
+
 #### Week 10. Functional Programming
 #### Week 11. Fundamental Data Structures 
 #### Exams
