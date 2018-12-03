@@ -571,6 +571,112 @@ def fib(n):
 
 
 #### Week 10. Functional Programming
+
+1. Functional programming(FP):
+  * Function's outputs depend only on input (i.e. **no global variables**)
+  * Minimize use of loops, espcially while loops (use recursion instead)
+  * Minimize use of variables
+
+2. Why do people use functional programming?
+  * Easy to verify for correctness
+  * May be more scalable -> runs more efficiently
+  * Map/Reduce in based on functional programming
+
+3. List comprehension expressions
+
+4. Higher order functions (HO-functions): they take another function as an input, or returns another function as an output
+
+  Example of HO function taking another function as input: 
+  ```py
+  def sum_function_vector(f,X):
+    # f is the function that will be used as an input. You can replace f with any other identifier (e.g. xyz01)
+    sum = 0
+    for x in X:
+      sum+=f(x)
+    return sum
+  ```
+
+  For example:
+
+  ```py
+  Y=[1,2,3,4]
+  s1=sum_function_vector(double,Y)
+  # double() is a function here
+  s2=sum_function_vector(math.sqrt, Y)
+  ```
+
+  Example of HO function returning another function as output:
+
+  ```py
+  def vectorize(f):
+    def new_func(X):
+      Y=[]
+      for x in X:
+        Y.append(f(x))
+      return Y
+    return new_func
+  ```
+  Real life example:
+  ```py
+  vec_double = vectorize(double)
+  vec_squabl = vectorize(squre)
+
+  y=vec.double([1,2,3])
+  ```
+
+5. Iterators: allows to create elements of a collection 1 by 1 when they are needed instead of materializing the whole collection
+
+  ```py
+   X = [1,3,7,8,...] #1B items 
+   it_squares_X = (square(x) for x in X)  #creates an iterator instead of a list
+   while True:
+      next_value = next(it_squares_X)  # next() is a special function that returns the next item in this list
+      if next_value == 9:
+        print(True)
+        break
+  ```
+
+  * `next(it_squares_X)` says “get me the next item of `Y = [square(x) for x in X]`”
+  * the next item is created in memory only when requested
+  * Y is virtual ( saves memory)
+
+6. Limitation of iterators:
+  * Iterators have limited functionality. Apart from `next()`, we what we can do with them is testing whether we are at the end of the iteration by catching `StopIteration` exception:
+  ```py
+    it = (x in [0,1]) next(it)
+    >>0
+    next(it)
+    >>1
+    next(it)
+    >> Error: StopIteration Exception
+  ```
+
+7. Use iterators with for-loop:
+  ```py
+  X = [1,3,7,8,...]
+  it_squares_X = (square(x) for x in X) 
+  for y in it_squares_X: #use iterator instead of lists here to save memory
+    if y == 9: 
+      print(True)
+        break
+  ```
+
+8. Iterator -> collection and collection -> iterator
+  ```py
+  # iterator to collection. This will materalise the collection, but cost time and memory
+  Y = list(it_squares_X)
+  Y = set(it_squares_X)
+  Y = tuple(it_squares_X)
+
+  # collection to iterator
+  # this is free - doesn't take memory or time
+  X = {1,2,3}
+  It_over_X = iter(X)
+
+  ```
+
+  For collections of large size, convert as little as possible
+
 #### Week 11. Fundamental Data Structures 
 #### Exams
 #### Regarding old exam papers
