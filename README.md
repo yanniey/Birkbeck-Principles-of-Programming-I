@@ -678,6 +678,36 @@ def fib(n):
   For collections of large size, convert as little as possible
 
 #### Week 11. Fundamental Data Structures 
+1. **Stacks** and **queues** both store sequence of items, but give access to them in deferent ways.
+
+2. Stacks basics
+  Basic stacks methods are: pop(),push(),peek()
+  ```py
+  class Stack:
+    def push(self, x):
+    ‘’’adds an element x at top’’’
+    def pop(self):
+    ‘’’removes the element at top’’’
+    def peek(self):
+    ‘’’returns the element of top’’’
+    def is_empty(self):
+    ‘’’returns True if stack is empty, otherwise False
+    ’’’
+  ```
+
+3. Queue basics
+  ```py
+  def Queue:
+    def enqueue(self, x):
+    ‘’’adds an element at back’’’
+    def dequeue(self):
+    ‘’’removes the element at front are returns it’’’
+    def is_empty(self):
+    ‘’’ returns True if queue is empty, otherwise False’’’
+  ```
+
+4. Linked lists
+
 #### Exams
 #### Regarding old exam papers
 The file below provides not the final version (I publish what I could get) but the pre-final one that may slightly differ in wording, figures, and other minor things. The problems at the examination were anyway those from the file.  
